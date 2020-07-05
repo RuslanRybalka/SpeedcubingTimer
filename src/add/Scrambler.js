@@ -48,6 +48,7 @@ export default class Scrambler{
     } 
 
     this.target.innerHTML = [...this.result].join('&nbsp;&nbsp;&nbsp;');   
+    return  [...this.result].join(' ');   
   }
 
   getScramble  = () => {

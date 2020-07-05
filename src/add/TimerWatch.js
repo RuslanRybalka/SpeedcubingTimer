@@ -8,7 +8,7 @@ export default class TimerWatch {
   start = () => {
     this.timeStart = Date.now();
     this.isRun = true;
-    this.run();
+    //this.run();
   }
   run = () => {
     if(this.isRun){

@@ -1,11 +1,11 @@
 import React from 'react';
 import t from './timer.module.scss';
 
-export const Timer = () => {
+export const Timer = (props) => {
   return (
-    <div className={t.timer_container}>
+    <div className={t.timer_container +  ' ' + props.classes} >
       <div id={t.timer}>
-        0.0
+        {props.time }
       </div>   
     </div>
   )
