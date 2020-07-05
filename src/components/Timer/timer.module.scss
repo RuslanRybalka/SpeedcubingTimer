@@ -1,0 +1,15 @@
+.timer_container{
+  font-size: 160px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+
+}
+#timer{
+  margin-bottom: 60px;
+}
