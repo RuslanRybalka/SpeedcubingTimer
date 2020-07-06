@@ -3,6 +3,8 @@ import s from './result.module.scss';
 import { connect } from 'react-redux';
 import { deleteAction } from '../../redux/actionCreators.js';
 
+//Result - компонент отображения результата
+
 const Result = (props) =>{
   return (
     <div className={s.result}>

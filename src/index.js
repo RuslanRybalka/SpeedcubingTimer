@@ -9,10 +9,6 @@ import { rootReducer } from './redux/rootReducer.js';
 
 let store = createStore(rootReducer);
 
-store.subscribe(() => console.log(store.getState()));
-
-
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>

@@ -3,16 +3,18 @@ import s from './results-container.module.scss';
 import  Result  from '../Result';
 import { connect } from 'react-redux';
 
-const ResultsContainer  = (props) => {
+//ResultsContainer - компонент-контейнер отображения результатов
 
-    return (
-      <div className={s.results}>
-        {props.solves.map((solve, index) => {
-          return <Result index = {index + 1} solveId={solve.id} key={solve.id} solve = {solve.time}/>})
-        }       
-      </div>
-    )  
+const ResultsContainer  = (props) => {
+  return (
+    <div className={s.results}>
+      {[...props.solves].reverse().map((solve, index) => {
+        return <Result index = {index + 1} solveId={solve.id} key={solve.id} solve = {solve.time}/>})
+      }       
+    </div>
+  )  
 }
+
 export default connect(
   store => ({solves: store}),
   null
