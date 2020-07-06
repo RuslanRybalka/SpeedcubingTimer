@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 import './App.css';
-import {Timer} from './components/Timer';
-import {Scramble} from './components/Scramble';
+import { Timer } from './components/Timer';
+import { Scramble } from './components/Scramble';
+import ResultsContainer from './components/ResultsContainer';
 
 import TimerWatch from './add/TimerWatch.js';
 import Scrambler from './add/Scrambler.js';
 
-const App = () => {
+import { addAction } from './redux/actionCreators.js'
+
+const App = (props) => {
 
   let scrambler = new Scrambler();
   let timer  = new TimerWatch();
@@ -15,7 +19,6 @@ const App = () => {
   const [time, setTime] = useState(0);
   const [scramble, setScramble] = useState(scrambler.scramble());
   const [classes, setClasses] = useState('');
-
 
   const handlerDelayBeforeStart = (event) => {
     if(event.keyCode === 32){
@@ -73,12 +76,12 @@ const App = () => {
       window.removeEventListener('keydown', handlerStopTimer);
       timer.stop();
       setTime(timer.getTimeFormat());
-      setScramble(scrambler.scramble());    
-      
+      setScramble(scrambler.scramble());        
       
       window.addEventListener('keydown', handlerDelayBeforeStart);      
       isSpacebarPressed = false;
       setClasses('');
+      props.onAddSolve(timer.getTimeFormat());
     }
     
   }
@@ -89,13 +92,6 @@ const App = () => {
       window.addEventListener('keyup', handlerStartTimer);
     } 
   }
-  
-  
-
-
-
-
-
   const initApp = () => {
     window.addEventListener('keydown', handlerDelayBeforeStart);
   }
@@ -115,8 +111,20 @@ const App = () => {
     <div className="App">
       <Scramble scramble = {scramble}/>
       <Timer time = {time} classes = {classes}/>
+      <ResultsContainer/>
     </div>
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      onAddSolve: (time) => {
+        let id = Math.floor(Math.random()*1000000);
+        dispatch( addAction( {id: id, time: time} ) )
+      }
+    }
+}
+export default connect(
+  state => ({solves: state}),
+  mapDispatchToProps,
+)(App);

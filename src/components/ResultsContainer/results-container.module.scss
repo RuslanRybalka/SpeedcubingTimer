@@ -1,0 +1,11 @@
+.results{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 90vh;
+  width: 250px;
+  background-color: #fff;
+}
