@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './result.module.scss';
 import { connect } from 'react-redux';
-import { deleteAction } from '../../redux/actionCreators.js';
+import { deleteAction, avgAction } from '../../redux/actionCreators.js';
 
 //Result - компонент отображения результата
 
@@ -20,7 +20,10 @@ const Result = (props) =>{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteSolve: id => dispatch( deleteAction(id) )
+    deleteSolve: id => {
+      dispatch( deleteAction(id) )
+      dispatch(avgAction());
+    }
   }
 }
 export default connect(

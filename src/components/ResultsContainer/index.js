@@ -16,6 +16,6 @@ const ResultsContainer  = (props) => {
 }
 
 export default connect(
-  store => ({solves: store}),
+  store => ({solves: store.solves}),
   null
 )(ResultsContainer);

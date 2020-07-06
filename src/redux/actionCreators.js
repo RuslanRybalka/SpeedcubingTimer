@@ -1,4 +1,4 @@
-import {ADD, DELETE} from "./actions.js";
+import {ADD, DELETE, AVG} from "./actions.js";
 
 export const addAction = (payload) => {
   return {
@@ -11,5 +11,11 @@ export const deleteAction = (id) => {
   return {
     type: DELETE, 
     payload: id
+  }
+}
+
+export const avgAction = () => {
+  return {
+    type: AVG
   }
 }

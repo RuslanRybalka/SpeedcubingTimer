@@ -4,11 +4,12 @@ import './App.css';
 import { Timer } from './components/Timer';
 import { Scramble } from './components/Scramble';
 import ResultsContainer from './components/ResultsContainer';
+import Avgs from './components/Avgs';
 
 import TimerWatch from './add/TimerWatch.js';
 import Scrambler from './add/Scrambler.js';
 
-import { addAction } from './redux/actionCreators.js'
+import { addAction, avgAction } from './redux/actionCreators.js'
 
 const App = (props) => {
   //scrambler - переменная, которая отвечает за скарамбл
@@ -151,6 +152,7 @@ const App = (props) => {
       <Scramble scramble = {scramble}/>
       <Timer time = {time} classes = {classes}/>
       <ResultsContainer/>
+      <Avgs/>
     </div>
   );
 }
@@ -166,7 +168,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
       onAddSolve: (time) => {
         let id = Math.floor(Math.random()*1000000);
-        dispatch( addAction( {id: id, time: time} ) )
+        dispatch( addAction( {id: id, time: time} ) );
+        dispatch(avgAction());
       }
     }
 }
