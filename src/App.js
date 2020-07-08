@@ -9,7 +9,7 @@ import Avgs from './components/Avgs';
 import TimerWatch from './add/TimerWatch.js';
 import Scrambler from './add/Scrambler.js';
 
-import { addAction, avgAction } from './redux/actionCreators.js'
+import { addAction, avgAction, hideInfosAction } from './redux/actionCreators.js'
 
 const App = (props) => {
   //scrambler - переменная, которая отвечает за скарамбл
@@ -39,6 +39,7 @@ const App = (props) => {
     if(event.keyCode === 32){
       //Проверяем был ли ЗАжат "Пробел"
       if(!isSpacebarPressed){
+         //props.onHideInfos();
         //устанавливаем флаг, что таймер еще не готов к запуску
         timer.isReady = false;
         //устанавливаем таймеру класс 'text-red'
@@ -111,14 +112,15 @@ const App = (props) => {
       timer.stop();
       //рендерим отображения таймера и следующего скрамбла
       setTime(timer.getTimeFormat());
-      setScramble(scrambler.scramble());        
+          
       //добвляем обработчик задержки старта таймера
       window.addEventListener('keydown', handlerDelayBeforeStart);  
       //устанавливаем флаг готовности таймера для следующего старта    
       isSpacebarPressed = false;
       setClasses('');
       //добаляем результат текущей сборки в state
-      props.onAddSolve(timer.getTimeFormat());
+      props.onAddSolve(timer.getTimeFormat(), scrambler.getScramble());
+      setScramble(scrambler.scramble());    
     }
     
   }
@@ -166,11 +168,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-      onAddSolve: (time) => {
+      onAddSolve: (time, scramble) => {
         let id = Math.floor(Math.random()*1000000);
-        dispatch( addAction( {id: id, time: time} ) );
+        dispatch( addAction( {id: id, time: time, scramble: scramble} ) );
         dispatch(avgAction());
-      }
+      },
+      //onHideInfos: () => dispatch(hideInfosAction())
     }
 }
 export default connect(

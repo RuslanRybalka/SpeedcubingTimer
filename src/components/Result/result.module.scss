@@ -1,10 +1,14 @@
 .result{
   display: flex;
   justify-content: flex-start;
-  width: 100%;
+  width: 250px;
   /*box-shadow: 2px 0 10px rgba(0,0,0,.28);*/
-  border: 1px solid rgba(0,0,0,0.05);
+  //border: 1px solid rgba(0,0,0,0.05);
   font-size: 16px;
+  position: relative;
+  height: 30px;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .index{
@@ -24,9 +28,31 @@
   padding-left: 20px;
   /*font-size: 18px;*/
   flex-grow: 1;
-
 }
-.result--info, .result--delete{
+.result--info{
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  width: 200px;
+  height: 100px;
+  padding: 5px;
+  &:before{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+.result--info-btn, .result--delete-btn{
   display: block;
   border: none;
   color: white;
@@ -37,12 +63,12 @@
   opacity: 0.8;
   transition: opacity 0.1s ease-in;
 }
-.result--info:hover, .result--delete:hover{
+.result--info-btn:hover, .result--delete-btn:hover{
   opacity: 1;
 }
-.result--info{
+.result--info-btn{
   background-color: rgb(35, 175, 175);
 }
-.result--delete{
+.result--delete-btn{
   background-color: #F2646C;
 }

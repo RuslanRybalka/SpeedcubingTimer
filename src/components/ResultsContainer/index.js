@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 const ResultsContainer  = (props) => {
   return (
     <div className={s.results}>
-      {[...props.solves].reverse().map((solve, index) => {
-        return <Result index = {index + 1} solveId={solve.id} key={solve.id} solve = {solve.time}/>})
+      {[...props.solves].reverse().map((solve, index, arr) => {
+        //return <Result index = {arr.length - index}  solve ={solve} key={solve.id} />})
+        return <Result index = {arr.length - index}  solve ={solve} key={solve.id} />})
       }       
     </div>
   )  
